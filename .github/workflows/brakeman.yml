@@ -14,9 +14,12 @@ jobs:
           bundler-cache: true
           ruby-version: 2.7.1
 
+      - name: Install Brakeman
+        run: |
+          gem install brakeman
+
       - name: Run Brakeman
         run: |
-          bin/bundler-audit --update
           bin/brakeman -f json > brakeman.json || exit 0
 
       - name: Brakeman Report
