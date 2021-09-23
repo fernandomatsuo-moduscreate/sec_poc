@@ -8,7 +8,7 @@ jobs:
 
     defaults:
       run:
-        working-directory: ./ruby
+        working-directory: ./ruby_vulnerable
 
     steps:
       - uses: actions/checkout@v2
