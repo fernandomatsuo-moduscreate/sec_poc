@@ -5,6 +5,11 @@ on: [push,pull_request]
 jobs:
   security:
     runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: ./ruby
+
     steps:
       - uses: actions/checkout@v2
 
