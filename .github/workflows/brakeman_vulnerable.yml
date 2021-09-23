@@ -25,10 +25,10 @@ jobs:
 
       - name: Run Brakeman
         run: |
-          brakeman -f json > tmp/brakeman.json || exit 0
+          brakeman -f json > brakeman.json || exit 0
 
       - name: Brakeman Report
         uses: devmasx/brakeman-linter-action@v1.0.0
         env:
-          REPORT_PATH: ./ruby_vulnerable/tmp/brakeman.json
+          REPORT_PATH: ./ruby_vulnerable/brakeman.json
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
