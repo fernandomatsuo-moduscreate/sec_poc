@@ -3,12 +3,12 @@ name: Brakeman
 on: [push,pull_request]
 
 jobs:
-  build:
+  security:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
 
-      - name: Setup Ruby
+      - name: Setup Ruby and install gems
         uses: ruby/setup-ruby@473e4d8fe5dd94ee328fdfca9f8c9c7afc9dae5e
         with:
           ruby-version: 2.7.1
@@ -19,10 +19,11 @@ jobs:
 
       - name: Run Brakeman
         run: |
-          brakeman -f json > tmp/brakeman.json || exit 0
+          bundler-audit --update
+          brakeman -f json > brakeman.json || exit 0
 
       - name: Brakeman Report
         uses: devmasx/brakeman-linter-action@v1.0.0
         env:
-          REPORT_PATH: tmp/brakeman.json
+          REPORT_PATH: brakeman.json
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
