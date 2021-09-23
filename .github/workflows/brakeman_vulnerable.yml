@@ -1,4 +1,4 @@
-name: Brakeman
+name: Brakeman-vulnerable
 
 on: [push,pull_request]
 
