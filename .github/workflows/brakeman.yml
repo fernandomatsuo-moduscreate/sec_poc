@@ -19,8 +19,8 @@ jobs:
 
       - name: Run Brakeman
         run: |
-          bundler-audit --update
-          brakeman -f json > brakeman.json || exit 0
+          bin/bundler-audit --update
+          bin/brakeman -f json > brakeman.json || exit 0
 
       - name: Brakeman Report
         uses: devmasx/brakeman-linter-action@v1.0.0
