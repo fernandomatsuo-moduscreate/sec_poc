@@ -30,5 +30,5 @@ jobs:
       - name: Brakeman Report
         uses: devmasx/brakeman-linter-action@v1.0.0
         env:
-          REPORT_PATH: ./ruby/tmp/brakeman.json
+          REPORT_PATH: ./ruby_vulnerable/tmp/brakeman.json
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
