@@ -1,0 +1,34 @@
+name: Brakeman-vulnerable
+
+on: [push,pull_request]
+
+jobs:
+  Security:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: ./ruby_vulnerable
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup Ruby and install gems
+        uses: ruby/setup-ruby@473e4d8fe5dd94ee328fdfca9f8c9c7afc9dae5e
+        with:
+          bundler-cache: true
+          ruby-version: 2.7.1
+
+      - name: Install Brakeman
+        run: |
+          gem install brakeman
+
+      - name: Run Brakeman
+        run: |
+          brakeman -f json > brakeman.json || exit 0
+
+      - name: Brakeman Report
+        uses: devmasx/brakeman-linter-action@v1.0.0
+        env:
+          REPORT_PATH: ./ruby_vulnerable/brakeman.json
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
